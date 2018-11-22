@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="o.c.dal.mapper.ClientScopeEntityMapper">
+  <resultMap id="BaseResultMap" type="o.c.dal.entity.ClientScopeEntity">
+    <id column="connect_id" jdbcType="VARCHAR" property="connectId" />
+    <result column="scope_id" jdbcType="VARCHAR" property="scopeId" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    connect_id, scope_id, client_id, status, update_user_id, create_user_id, update_datetime, 
+    create_datetime
+  </sql>
+  <select id="selectByPKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_client_connect_scope
+    where connect_id = #{connectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPKey" parameterType="java.lang.String">
+    delete from t_client_connect_scope
+    where connect_id = #{connectId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="o.c.dal.entity.ClientScopeEntity">
+    <selectKey keyProperty="connectId" order="BEFORE" resultType="java.lang.String">
+      select nextval('SEQ_SCOPE_CONNECT_ID')
+    </selectKey>
+    insert into t_client_connect_scope (connect_id, scope_id, client_id, 
+      status, update_user_id, create_user_id, 
+      update_datetime, create_datetime)
+    values (#{connectId,jdbcType=VARCHAR}, #{scopeId,jdbcType=VARCHAR}, #{clientId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="o.c.dal.entity.ClientScopeEntity">
+    <selectKey keyProperty="connectId" order="BEFORE" resultType="java.lang.String">
+      select nextval('SEQ_SCOPE_CONNECT_ID')
+    </selectKey>
+    insert into t_client_connect_scope
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      connect_id,
+      <if test="scopeId != null">
+        scope_id,
+      </if>
+      <if test="clientId != null">
+        client_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{connectId,jdbcType=VARCHAR},
+      <if test="scopeId != null">
+        #{scopeId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateDynamic" parameterType="o.c.dal.entity.ClientScopeEntity">
+    update t_client_connect_scope
+    <set>
+      <if test="scopeId != null">
+        scope_id = #{scopeId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where connect_id = #{connectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateWhole" parameterType="o.c.dal.entity.ClientScopeEntity">
+    update t_client_connect_scope
+    set scope_id = #{scopeId,jdbcType=VARCHAR},
+      client_id = #{clientId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where connect_id = #{connectId,jdbcType=VARCHAR}
+  </update>
+  <sql id="pageQuery_where">
+    <where>
+      <if test="connectId != null">
+         and connect_id = #{connectId,jdbcType=VARCHAR}
+      </if>
+      <if test="scopeId != null">
+         and scope_id = #{scopeId,jdbcType=VARCHAR}
+      </if>
+      <if test="clientId != null">
+         and client_id = #{clientId,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+         and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="updateUserId != null">
+         and update_user_id = #{updateUserId,jdbcType=VARCHAR}
+      </if>
+      <if test="createUserId != null">
+         and create_user_id = #{createUserId,jdbcType=VARCHAR}
+      </if>
+      <if test="updateDatetime != null">
+         and update_datetime = #{updateDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDatetime != null">
+         and create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="pageQuery" resultMap="BaseResultMap">
+     select * from t_client_connect_scope
+    <include refid="pageQuery_where" />
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select connect_id, scope_id, client_id, status, update_user_id, create_user_id, update_datetime, 
+    create_datetime
+    from t_client_connect_scope
+  </select>
+</mapper>

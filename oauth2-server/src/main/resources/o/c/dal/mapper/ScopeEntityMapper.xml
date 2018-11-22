@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="o.c.dal.mapper.ScopeEntityMapper">
+  <resultMap id="BaseResultMap" type="o.c.dal.entity.ScopeEntity">
+    <id column="scope_id" jdbcType="VARCHAR" property="scopeId" />
+    <result column="scope_name" jdbcType="VARCHAR" property="scopeName" />
+    <result column="scope_type" jdbcType="VARCHAR" property="scopeType" />
+    <result column="scope_icon" jdbcType="VARCHAR" property="scopeIcon" />
+    <result column="scope_url" jdbcType="VARCHAR" property="scopeUrl" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="scope_desc" jdbcType="VARCHAR" property="scopeDesc" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    scope_id, scope_name, scope_type, scope_icon, scope_url, parent_id, scope_desc, status, 
+    update_user_id, create_user_id, update_datetime, create_datetime
+  </sql>
+  <select id="selectByPKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_client_scope
+    where scope_id = #{scopeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPKey" parameterType="java.lang.String">
+    delete from t_client_scope
+    where scope_id = #{scopeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="o.c.dal.entity.ScopeEntity">
+    <selectKey keyProperty="scopeId" order="BEFORE" resultType="java.lang.String">
+      select nextval('SEQ_SCOPE_ID')
+    </selectKey>
+    insert into t_client_scope (scope_id, scope_name, scope_type, 
+      scope_icon, scope_url, parent_id, 
+      scope_desc, status, update_user_id, 
+      create_user_id, update_datetime, create_datetime
+      )
+    values (#{scopeId,jdbcType=VARCHAR}, #{scopeName,jdbcType=VARCHAR}, #{scopeType,jdbcType=VARCHAR}, 
+      #{scopeIcon,jdbcType=VARCHAR}, #{scopeUrl,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{scopeDesc,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="o.c.dal.entity.ScopeEntity">
+    <selectKey keyProperty="scopeId" order="BEFORE" resultType="java.lang.String">
+      select nextval('SEQ_SCOPE_ID')
+    </selectKey>
+    insert into t_client_scope
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      scope_id,
+      <if test="scopeName != null">
+        scope_name,
+      </if>
+      <if test="scopeType != null">
+        scope_type,
+      </if>
+      <if test="scopeIcon != null">
+        scope_icon,
+      </if>
+      <if test="scopeUrl != null">
+        scope_url,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="scopeDesc != null">
+        scope_desc,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{scopeId,jdbcType=VARCHAR},
+      <if test="scopeName != null">
+        #{scopeName,jdbcType=VARCHAR},
+      </if>
+      <if test="scopeType != null">
+        #{scopeType,jdbcType=VARCHAR},
+      </if>
+      <if test="scopeIcon != null">
+        #{scopeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="scopeUrl != null">
+        #{scopeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="scopeDesc != null">
+        #{scopeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateDynamic" parameterType="o.c.dal.entity.ScopeEntity">
+    update t_client_scope
+    <set>
+      <if test="scopeName != null">
+        scope_name = #{scopeName,jdbcType=VARCHAR},
+      </if>
+      <if test="scopeType != null">
+        scope_type = #{scopeType,jdbcType=VARCHAR},
+      </if>
+      <if test="scopeIcon != null">
+        scope_icon = #{scopeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="scopeUrl != null">
+        scope_url = #{scopeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="scopeDesc != null">
+        scope_desc = #{scopeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where scope_id = #{scopeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateWhole" parameterType="o.c.dal.entity.ScopeEntity">
+    update t_client_scope
+    set scope_name = #{scopeName,jdbcType=VARCHAR},
+      scope_type = #{scopeType,jdbcType=VARCHAR},
+      scope_icon = #{scopeIcon,jdbcType=VARCHAR},
+      scope_url = #{scopeUrl,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      scope_desc = #{scopeDesc,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where scope_id = #{scopeId,jdbcType=VARCHAR}
+  </update>
+  <sql id="pageQuery_where">
+    <where>
+      <if test="scopeId != null">
+         and scope_id = #{scopeId,jdbcType=VARCHAR}
+      </if>
+      <if test="scopeName != null">
+         and scope_name = #{scopeName,jdbcType=VARCHAR}
+      </if>
+      <if test="scopeType != null">
+         and scope_type = #{scopeType,jdbcType=VARCHAR}
+      </if>
+      <if test="scopeIcon != null">
+         and scope_icon = #{scopeIcon,jdbcType=VARCHAR}
+      </if>
+      <if test="scopeUrl != null">
+         and scope_url = #{scopeUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="parentId != null">
+         and parent_id = #{parentId,jdbcType=VARCHAR}
+      </if>
+      <if test="scopeDesc != null">
+         and scope_desc = #{scopeDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+         and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="updateUserId != null">
+         and update_user_id = #{updateUserId,jdbcType=VARCHAR}
+      </if>
+      <if test="createUserId != null">
+         and create_user_id = #{createUserId,jdbcType=VARCHAR}
+      </if>
+      <if test="updateDatetime != null">
+         and update_datetime = #{updateDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDatetime != null">
+         and create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="pageQuery" resultMap="BaseResultMap">
+     select * from t_client_scope
+    <include refid="pageQuery_where" />
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select scope_id, scope_name, scope_type, scope_icon, scope_url, parent_id, scope_desc, 
+    status, update_user_id, create_user_id, update_datetime, create_datetime
+    from t_client_scope
+  </select>
+</mapper>

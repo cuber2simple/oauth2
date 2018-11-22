@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="com.ipaylinks.plugin.mybatis.IPLFixedMybatisPlugin">
+            <property name="daoSuperClass" value="o.c.gj.mapper.BaseMapper"></property>
+        </plugin>
+        <commentGenerator type="com.ipaylinks.plugin.mybatis.CommentCreator">
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="org.postgresql.Driver" connectionURL="jdbc:postgresql://127.0.0.1:5432/oauth2?useUnicode=true&amp;characterEncoding=UTF-8" userId="oauth2" password="oauth2">
+        </jdbcConnection>
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="o.c.dal.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="o.c.dal.mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+            <property name="daoSuperClass" value="o.c.gj.mapper.BaseMapper"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="o.c.dal.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+         <table tableName="T_OAUTH2_CLIENT"
+               domainObjectName="ClientEntity"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="T_CLIENT_CONNECT_SCOPE"
+               domainObjectName="ClientScopeEntity"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey  type="pre"  column="connect_id" sqlStatement="select nextval('SEQ_SCOPE_CONNECT_ID')"></generatedKey>
+        </table>
+
+        <table tableName="T_CLIENT_SCOPE"
+               domainObjectName="ScopeEntity"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey  type="pre"  column="scope_id" sqlStatement="select nextval('SEQ_SCOPE_ID')"></generatedKey>
+        </table>
+
+        <table tableName="T_CLIENT_TOKEN"
+               domainObjectName="ClientTokenEntity"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey  type="pre"  column="token_id" sqlStatement="select nextval('SEQ_SCOPE_ID')"></generatedKey>
+        </table>
+
+        <table tableName="T_CLIENT_TOKEN_HIS_201812"
+               domainObjectName="ClientTokenHisEntity"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+    </context>
+</generatorConfiguration>

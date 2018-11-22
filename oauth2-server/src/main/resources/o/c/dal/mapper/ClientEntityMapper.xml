@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="o.c.dal.mapper.ClientEntityMapper">
+  <resultMap id="BaseResultMap" type="o.c.dal.entity.ClientEntity">
+    <id column="client_id" jdbcType="VARCHAR" property="clientId" />
+    <result column="client_secret" jdbcType="VARCHAR" property="clientSecret" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="client_type" jdbcType="VARCHAR" property="clientType" />
+    <result column="home_uri" jdbcType="VARCHAR" property="homeUri" />
+    <result column="webhook_uri" jdbcType="VARCHAR" property="webhookUri" />
+    <result column="access_token_validity" jdbcType="INTEGER" property="accessTokenValidity" />
+    <result column="refresh_token_validity" jdbcType="INTEGER" property="refreshTokenValidity" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="rsa_private_key" jdbcType="VARCHAR" property="rsaPrivateKey" />
+    <result column="rsa_public_key" jdbcType="VARCHAR" property="rsaPublicKey" />
+    <result column="app_customer_id" jdbcType="VARCHAR" property="appCustomerId" />
+    <result column="owner_operator_id" jdbcType="VARCHAR" property="ownerOperatorId" />
+    <result column="expire_datetime" jdbcType="TIMESTAMP" property="expireDatetime" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    client_id, client_secret, client_name, client_type, home_uri, webhook_uri, access_token_validity, 
+    refresh_token_validity, avatar, status, rsa_private_key, rsa_public_key, app_customer_id, 
+    owner_operator_id, expire_datetime, update_datetime, create_datetime
+  </sql>
+  <select id="selectByPKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_oauth2_client
+    where client_id = #{clientId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPKey" parameterType="java.lang.String">
+    delete from t_oauth2_client
+    where client_id = #{clientId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="o.c.dal.entity.ClientEntity">
+    insert into t_oauth2_client (client_id, client_secret, client_name, 
+      client_type, home_uri, webhook_uri, 
+      access_token_validity, refresh_token_validity, 
+      avatar, status, rsa_private_key, 
+      rsa_public_key, app_customer_id, owner_operator_id, 
+      expire_datetime, update_datetime, create_datetime
+      )
+    values (#{clientId,jdbcType=VARCHAR}, #{clientSecret,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, 
+      #{clientType,jdbcType=VARCHAR}, #{homeUri,jdbcType=VARCHAR}, #{webhookUri,jdbcType=VARCHAR}, 
+      #{accessTokenValidity,jdbcType=INTEGER}, #{refreshTokenValidity,jdbcType=INTEGER}, 
+      #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{rsaPrivateKey,jdbcType=VARCHAR}, 
+      #{rsaPublicKey,jdbcType=VARCHAR}, #{appCustomerId,jdbcType=VARCHAR}, #{ownerOperatorId,jdbcType=VARCHAR}, 
+      #{expireDatetime,jdbcType=TIMESTAMP}, now(), now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="o.c.dal.entity.ClientEntity">
+    insert into t_oauth2_client
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clientId != null">
+        client_id,
+      </if>
+      <if test="clientSecret != null">
+        client_secret,
+      </if>
+      <if test="clientName != null">
+        client_name,
+      </if>
+      <if test="clientType != null">
+        client_type,
+      </if>
+      <if test="homeUri != null">
+        home_uri,
+      </if>
+      <if test="webhookUri != null">
+        webhook_uri,
+      </if>
+      <if test="accessTokenValidity != null">
+        access_token_validity,
+      </if>
+      <if test="refreshTokenValidity != null">
+        refresh_token_validity,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="rsaPrivateKey != null">
+        rsa_private_key,
+      </if>
+      <if test="rsaPublicKey != null">
+        rsa_public_key,
+      </if>
+      <if test="appCustomerId != null">
+        app_customer_id,
+      </if>
+      <if test="ownerOperatorId != null">
+        owner_operator_id,
+      </if>
+      <if test="expireDatetime != null">
+        expire_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSecret != null">
+        #{clientSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientType != null">
+        #{clientType,jdbcType=VARCHAR},
+      </if>
+      <if test="homeUri != null">
+        #{homeUri,jdbcType=VARCHAR},
+      </if>
+      <if test="webhookUri != null">
+        #{webhookUri,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenValidity != null">
+        #{accessTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="refreshTokenValidity != null">
+        #{refreshTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rsaPrivateKey != null">
+        #{rsaPrivateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="rsaPublicKey != null">
+        #{rsaPublicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="appCustomerId != null">
+        #{appCustomerId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerOperatorId != null">
+        #{ownerOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="expireDatetime != null">
+        #{expireDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateDynamic" parameterType="o.c.dal.entity.ClientEntity">
+    update t_oauth2_client
+    <set>
+      update_datetime = now() ,
+      <if test="clientSecret != null">
+        client_secret = #{clientSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientType != null">
+        client_type = #{clientType,jdbcType=VARCHAR},
+      </if>
+      <if test="homeUri != null">
+        home_uri = #{homeUri,jdbcType=VARCHAR},
+      </if>
+      <if test="webhookUri != null">
+        webhook_uri = #{webhookUri,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenValidity != null">
+        access_token_validity = #{accessTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="refreshTokenValidity != null">
+        refresh_token_validity = #{refreshTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rsaPrivateKey != null">
+        rsa_private_key = #{rsaPrivateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="rsaPublicKey != null">
+        rsa_public_key = #{rsaPublicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="appCustomerId != null">
+        app_customer_id = #{appCustomerId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerOperatorId != null">
+        owner_operator_id = #{ownerOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="expireDatetime != null">
+        expire_datetime = #{expireDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where client_id = #{clientId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateWhole" parameterType="o.c.dal.entity.ClientEntity">
+    update t_oauth2_client
+    set client_secret = #{clientSecret,jdbcType=VARCHAR},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      client_type = #{clientType,jdbcType=VARCHAR},
+      home_uri = #{homeUri,jdbcType=VARCHAR},
+      webhook_uri = #{webhookUri,jdbcType=VARCHAR},
+      access_token_validity = #{accessTokenValidity,jdbcType=INTEGER},
+      refresh_token_validity = #{refreshTokenValidity,jdbcType=INTEGER},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      rsa_private_key = #{rsaPrivateKey,jdbcType=VARCHAR},
+      rsa_public_key = #{rsaPublicKey,jdbcType=VARCHAR},
+      app_customer_id = #{appCustomerId,jdbcType=VARCHAR},
+      owner_operator_id = #{ownerOperatorId,jdbcType=VARCHAR},
+      expire_datetime = #{expireDatetime,jdbcType=TIMESTAMP},
+      update_datetime = now()
+    where client_id = #{clientId,jdbcType=VARCHAR}
+  </update>
+  <sql id="pageQuery_where">
+    <where>
+      <if test="clientId != null">
+         and client_id = #{clientId,jdbcType=VARCHAR}
+      </if>
+      <if test="clientSecret != null">
+         and client_secret = #{clientSecret,jdbcType=VARCHAR}
+      </if>
+      <if test="clientName != null">
+         and client_name = #{clientName,jdbcType=VARCHAR}
+      </if>
+      <if test="clientType != null">
+         and client_type = #{clientType,jdbcType=VARCHAR}
+      </if>
+      <if test="homeUri != null">
+         and home_uri = #{homeUri,jdbcType=VARCHAR}
+      </if>
+      <if test="webhookUri != null">
+         and webhook_uri = #{webhookUri,jdbcType=VARCHAR}
+      </if>
+      <if test="accessTokenValidity != null">
+         and access_token_validity = #{accessTokenValidity,jdbcType=INTEGER}
+      </if>
+      <if test="refreshTokenValidity != null">
+         and refresh_token_validity = #{refreshTokenValidity,jdbcType=INTEGER}
+      </if>
+      <if test="avatar != null">
+         and avatar = #{avatar,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+         and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="rsaPrivateKey != null">
+         and rsa_private_key = #{rsaPrivateKey,jdbcType=VARCHAR}
+      </if>
+      <if test="rsaPublicKey != null">
+         and rsa_public_key = #{rsaPublicKey,jdbcType=VARCHAR}
+      </if>
+      <if test="appCustomerId != null">
+         and app_customer_id = #{appCustomerId,jdbcType=VARCHAR}
+      </if>
+      <if test="ownerOperatorId != null">
+         and owner_operator_id = #{ownerOperatorId,jdbcType=VARCHAR}
+      </if>
+      <if test="expireDatetime != null">
+         and expire_datetime = #{expireDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateDatetime != null">
+         and update_datetime = #{updateDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDatetime != null">
+         and create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="pageQuery" resultMap="BaseResultMap">
+     select * from t_oauth2_client
+    <include refid="pageQuery_where" />
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select client_id, client_secret, client_name, client_type, home_uri, webhook_uri, 
+    access_token_validity, refresh_token_validity, avatar, status, rsa_private_key, rsa_public_key, 
+    app_customer_id, owner_operator_id, expire_datetime, update_datetime, create_datetime
+    from t_oauth2_client
+  </select>
+</mapper>

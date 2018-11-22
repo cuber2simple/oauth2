@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: oauth2
+  servlet:
+    multipart:
+      max-request-size: 120MB
+      max-file-size: 120MB
+  redis:
+    host: 139.196.86.188
+    password: AdeTTT32312ttedsdcaHUHU
+    port: 3333
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/oauth2?useUnicode=true&amp;characterEncoding=UTF-8
+    password: oauth2
+    username: oauth2
+    driver-class-name: org.postgresql.Driver
+  cloud:
+    zookeeper:
+      connect-string:
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+server:
+  port: 8081

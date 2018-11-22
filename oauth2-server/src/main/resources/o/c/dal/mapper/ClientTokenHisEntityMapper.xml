@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="o.c.dal.mapper.ClientTokenHisEntityMapper">
+  <resultMap id="BaseResultMap" type="o.c.dal.entity.ClientTokenHisEntity">
+    <id column="token_id" jdbcType="VARCHAR" property="tokenId" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
+    <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken" />
+    <result column="access_token_validity" jdbcType="INTEGER" property="accessTokenValidity" />
+    <result column="refresh_token_validity" jdbcType="INTEGER" property="refreshTokenValidity" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="scope" jdbcType="VARCHAR" property="scope" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="expire_datetime" jdbcType="TIMESTAMP" property="expireDatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    token_id, client_id, access_token, refresh_token, access_token_validity, refresh_token_validity, 
+    status, scope, create_datetime, expire_datetime
+  </sql>
+  <select id="selectByPKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_client_token_his
+    where token_id = #{tokenId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPKey" parameterType="java.lang.String">
+    delete from t_client_token_his
+    where token_id = #{tokenId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="o.c.dal.entity.ClientTokenHisEntity">
+    insert into t_client_token_his (token_id, client_id, access_token, 
+      refresh_token, access_token_validity, refresh_token_validity, 
+      status, scope, create_datetime, 
+      expire_datetime)
+    values (#{tokenId,jdbcType=VARCHAR}, #{clientId,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, 
+      #{refreshToken,jdbcType=VARCHAR}, #{accessTokenValidity,jdbcType=INTEGER}, #{refreshTokenValidity,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{scope,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{expireDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="o.c.dal.entity.ClientTokenHisEntity">
+    insert into t_client_token_his
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tokenId != null">
+        token_id,
+      </if>
+      <if test="clientId != null">
+        client_id,
+      </if>
+      <if test="accessToken != null">
+        access_token,
+      </if>
+      <if test="refreshToken != null">
+        refresh_token,
+      </if>
+      <if test="accessTokenValidity != null">
+        access_token_validity,
+      </if>
+      <if test="refreshTokenValidity != null">
+        refresh_token_validity,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="scope != null">
+        scope,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="expireDatetime != null">
+        expire_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tokenId != null">
+        #{tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null">
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null">
+        #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenValidity != null">
+        #{accessTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="refreshTokenValidity != null">
+        #{refreshTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="scope != null">
+        #{scope,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDatetime != null">
+        #{expireDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateDynamic" parameterType="o.c.dal.entity.ClientTokenHisEntity">
+    update t_client_token_his
+    <set>
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null">
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null">
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenValidity != null">
+        access_token_validity = #{accessTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="refreshTokenValidity != null">
+        refresh_token_validity = #{refreshTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="scope != null">
+        scope = #{scope,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDatetime != null">
+        expire_datetime = #{expireDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where token_id = #{tokenId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateWhole" parameterType="o.c.dal.entity.ClientTokenHisEntity">
+    update t_client_token_his
+    set client_id = #{clientId,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      access_token_validity = #{accessTokenValidity,jdbcType=INTEGER},
+      refresh_token_validity = #{refreshTokenValidity,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      scope = #{scope,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      expire_datetime = #{expireDatetime,jdbcType=TIMESTAMP}
+    where token_id = #{tokenId,jdbcType=VARCHAR}
+  </update>
+  <sql id="pageQuery_where">
+    <where>
+      <if test="tokenId != null">
+         and token_id = #{tokenId,jdbcType=VARCHAR}
+      </if>
+      <if test="clientId != null">
+         and client_id = #{clientId,jdbcType=VARCHAR}
+      </if>
+      <if test="accessToken != null">
+         and access_token = #{accessToken,jdbcType=VARCHAR}
+      </if>
+      <if test="refreshToken != null">
+         and refresh_token = #{refreshToken,jdbcType=VARCHAR}
+      </if>
+      <if test="accessTokenValidity != null">
+         and access_token_validity = #{accessTokenValidity,jdbcType=INTEGER}
+      </if>
+      <if test="refreshTokenValidity != null">
+         and refresh_token_validity = #{refreshTokenValidity,jdbcType=INTEGER}
+      </if>
+      <if test="status != null">
+         and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="scope != null">
+         and scope = #{scope,jdbcType=VARCHAR}
+      </if>
+      <if test="createDatetime != null">
+         and create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="expireDatetime != null">
+         and expire_datetime = #{expireDatetime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="pageQuery" resultMap="BaseResultMap">
+     select * from t_client_token_his
+    <include refid="pageQuery_where" />
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select token_id, client_id, access_token, refresh_token, access_token_validity, refresh_token_validity, 
+    status, scope, create_datetime, expire_datetime
+    from t_client_token_his
+  </select>
+</mapper>
