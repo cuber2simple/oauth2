@@ -293,4 +293,8 @@
     app_customer_id, owner_operator_id, expire_datetime, update_datetime, create_datetime
     from t_oauth2_client
   </select>
+
+  <select id="nextClientId" resultType="java.lang.String">
+    select nextval('SEQ_CLIENT_ID')
+  </select>
 </mapper>
